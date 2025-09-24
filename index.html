@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Activation Bot WhatsApp</title>
+<style>
+  * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+  body {
+    background: #121212;
+    color: #eee;
+    text-align: center;
+    padding: 50px;
+  }
+
+  /* --- Splash screen --- */
+  #splash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #0a0a0a;
+    color: crimson;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  #splash h2 {font-size: 2rem; margin-bottom: 15px;}
+  #splash p {color: #bbb; font-size: 1.1rem;}
+
+  /* --- Main container --- */
+  .container {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(30,30,30,0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255,0,50,0.3);
+    display: none; /* masqué au départ */
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: crimson;
+  }
+  p {margin-bottom: 15px; font-size: 1rem;}
+
+  input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    width: 80%;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: crimson;
+    color: #fff;
+    transition: 0.3s;
+  }
+  button:hover {
+    background: #ff3355;
+    box-shadow: 0 0 10px crimson;
+  }
+
+  #code {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #0f0;
+  }
+</style>
+</head>
+<body>
+  <!-- Splash screen -->
+  <div id="splash">
+    <h2>🌑💀 BIENVENUE DANS LES ABYSSES 💀🌑</h2>
+    <p>Chargement du portail... Préparez-vous à activer votre bot WhatsApp.</p>
+  </div>
+
+  <!-- Main content -->
+  <div class="container" id="main">
+    <h1>Activation Bot WhatsApp</h1>
+    <p>Entrez votre numéro pour générer un code :</p>
+    <input type="text" id="number" placeholder="+243..." />
+    <br/>
+    <button onclick="generateCode()">Générer le code</button>
+    <div id="code"></div>
+  </div>
+
+<script>
+  // Splash screen timeout
+  setTimeout(() => {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("main").style.display = "block";
+  }, 5000);
+
+  function generateCode(){
+    let num=document.getElementById('number').value;
+    if(!num){alert("Entrez un numéro"); return;}
+    let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let code="WABOT-"+Array.from({length:8},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+    document.getElementById('code').innerHTML=code+' <button onclick="copyCode()">Copier</button>';
+  }
+  function copyCode(){
+    let text=document.getElementById('code').innerText;
+    navigator.clipboard.writeText(text);
+    alert("Code copié !");
+  }
+</script>
+</body>
+  </html>
